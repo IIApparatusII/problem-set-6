@@ -11,7 +11,10 @@
  */
 
 function sayHello() {
-
+let canvas = document.getElementById('canvas1');
+let ctx = canvas.getContext('2d');
+ctx.font = '48px sans-serif';
+ctx.strokeText('Hello, World!', 10, 50);
 }
 
 /*
@@ -38,7 +41,34 @@ function sayHello() {
  */
 
 function drawRectangle() {
+  let canvas = document.getElementById('canvas2');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512);
 
+  let height = prompt("Height:");
+  let width = prompt("Width:");
+  let x = prompt("X:");
+  let y = prompt("Y:");
+  let rect = 0;
+  if (height < 1) {
+    alert('Your height is too small.');
+  }
+  if (width < 1) {
+    alert('Your width is too small.');
+  }
+  if (x < 5) {
+    alert('Your x-coordinate is too small.');
+  }
+  if (y < 5) {
+    alert('Your y-coordinate is too small.');
+  }
+  if (width > (1024-y) || height > (512-x)) {
+    alert('The rectangle will not fit on the canvas.');
+
+  }
+  else {
+  ctx.strokeRect(x, y, width, height);
+}
 }
 
 /*
@@ -67,7 +97,16 @@ function drawRectangle() {
  */
 
 function drawColoredRectangle() {
+  let canvas = document.getElementById('canvas3');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512);
 
+  let color = prompt('Select a Color.');
+  if (color != "black" || color != "blue" || color != "green" || color != "orange" || color != "purple" || color != "red" || color != "yellow"){
+    alert(`${color} is not a supported color.`);
+  }
+  ctx.fillStyle(color);
+  ctx.fillRect(10, 10, 100, 50);
 }
 
 /*
