@@ -102,10 +102,11 @@ function drawColoredRectangle() {
   ctx.clearRect(0, 0, 1024, 512);
 
   let color = prompt('Select a Color.');
-  if (color != "black" || color != "blue" || color != "green" || color != "orange" || color != "purple" || color != "red" || color != "yellow"){
+  //color = String(color);
+  if (color !== "black" && color !== "blue" && color !== "green" && color !== "orange" && color !== "purple" && color !== "red" && color !== "yellow"){
     alert(`${color} is not a supported color.`);
   }
-  ctx.fillStyle(color);
+  ctx.fillStyle = color;
   ctx.fillRect(10, 10, 100, 50);
 }
 
@@ -139,7 +140,23 @@ function drawColoredRectangle() {
  */
 
 function drawTriangle() {
+  let canvas = document.getElementById('canvas4');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512);
 
+  let sideOne = prompt('Side 1:');
+  let sideTwo = prompt('Side 2:');
+  let sideThree = prompt('Side 3:');
+  if ((sideOne ** 2) + (sideTwo ** 2) !== (sideThree ** 2) || (sideOne ** 2) + (sideThree ** 2) !== (sideTwo ** 2) || (sideTwo ** 2) + (sideThree ** 2) !== (sideOne ** 2)){
+    alert('That is not a valid right triangle.');
+  }
+
+
+/*  ctx.beginPath();
+    ctx.moveTo(75, 50);
+    ctx.lineTo(100, 75);
+    ctx.lineTo(100, 25);
+    ctx.stroke();*/
 }
 
 /*
