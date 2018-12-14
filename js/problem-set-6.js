@@ -147,18 +147,36 @@ function drawTriangle() {
   let sideOne = prompt('Side 1:');
   let sideTwo = prompt('Side 2:');
   let sideThree = prompt('Side 3:');
-  if ((sideOne ** 2) + (sideTwo ** 2) !== (sideThree ** 2) || (sideOne ** 2) + (sideThree ** 2) !== (sideTwo ** 2) || (sideTwo ** 2) + (sideThree ** 2) !== (sideOne ** 2)){
+  if ((sideOne ** 2) + (sideTwo ** 2) !== (sideThree ** 2) && (sideOne ** 2) + (sideThree ** 2) !== (sideTwo ** 2) && (sideTwo ** 2) + (sideThree ** 2) !== (sideOne ** 2)){
     alert('That is not a valid right triangle.');
   }
+ else {
+   sideOne = Number(sideOne);
+   sideTwo = Number(sideTwo);
+   sideThree = Number(sideThree);
 
+  let sideLeft = Math.min(sideOne, sideTwo, sideThree);
+  let hypotenuse = Math.max(sideOne, sideTwo, sideThree);
+  let sideBottom = sideOne + sideTwo + sideThree - sideLeft - hypotenuse;
+  sideLeft = sideLeft + 10, sideBottom = sideBottom + 10;
 
+//let p = document.getElementById('output4');
+//p.innerHTML = (`Short Left side: ${sideLeft}, Bottom side: ${sideBottom}, hypotenuse: ${hypotenuse}`)
+
+  ctx.beginPath();
+     ctx.moveTo(10, 10);
+     ctx.lineTo(10, sideLeft);
+     ctx.lineTo(sideBottom, sideLeft);
+//  ctx.lineTo(10, 10);
+  ctx.closePath();
+  ctx.stroke();
 /*  ctx.beginPath();
     ctx.moveTo(75, 50);
     ctx.lineTo(100, 75);
     ctx.lineTo(100, 25);
     ctx.stroke();*/
+ }
 }
-
 /*
  * Smile. 7 points.
  *
@@ -179,7 +197,29 @@ function drawTriangle() {
  */
 
 function drawSmileyFace() {
+  let canvas = document.getElementById('canvas5');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512);
 
+  let radius = prompt('Radius:');
+  radius = Number(radius);
+  if (radius > 256){
+    alert('The smiley face will not fit on the canvas.')
+  }
+  if (radius <= 1){
+    alert('Your radius is too small.')
+  }
+  if (radius % radius != 0){
+    alert('Your input is not a number.')
+}
+
+let coordinate = 10 + radius;
+
+  ctx.beginPath();
+    ctx.arc(coordinate, coordinate, radius, 0, Math.PI * 2, true);
+    ctx.moveTo((coordinate + 10), coordinate, (radius - (radius * 0.75)), 0, Math.PI, false);
+  ctx.stroke();
+/*Forgot to make moveTo and ctx.arc different lines. Change it.*/
 }
 
 /*
