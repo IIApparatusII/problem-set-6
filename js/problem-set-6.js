@@ -217,7 +217,10 @@ let coordinate = 10 + radius;
 
   ctx.beginPath();
     ctx.arc(coordinate, coordinate, radius, 0, Math.PI * 2, true);
-    ctx.moveTo((coordinate + 10), coordinate, (radius - (radius * 0.75)), 0, Math.PI, false);
+    ctx.moveTo((coordinate + (radius * 0.75)), coordinate);
+    ctx.arc(coordinate, coordinate, (radius - (radius * 0.25)), 0, Math.PI, false);
+    ctx.moveTo((coordinate - (radius * 0.5)), (coordinate - (radius * 0.5)));
+    ctx.arc(radius, radius, (radius - (radius * 0.75)), 0, Math.PI * 2, true);
   ctx.stroke();
 /*Forgot to make moveTo and ctx.arc different lines. Change it.*/
 }
