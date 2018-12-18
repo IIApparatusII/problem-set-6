@@ -259,33 +259,30 @@ function drawStar() {
   let ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, 1024, 512);
 
-  let oR = prompt("Enter the Outer Radius");
-  let iR = prompt("Enter the Inner Radius");
+ let outer = prompt("Enter the Outer Radius");
+let inner = prompt("Enter the Inner Radius");
     
-  oR = Number(oR);
-  iR = Number(iR);
-  if (isNaN(oR) == true || isNaN(iR) == true) {
+outer = Number(outer);
+inner = Number(inner);
+
+if (isNaN(outer) == true || isNaN(inner) == true) {
   alert("One of your inputs is not a number.");
-  } 
-  else if (oR < 2) {
+} else if (outer < 2) {
   alert("Your outer radius is too small.");
-  } 
-  else if (iR < 1) {
+} else if (inner < 1) {
   alert("Your inner radius is too small.");
-  } 
-  else if (oR <= iR) {
+} else if (outer <= inner) {
   alert("Your outer radius must be larger than your inner radius.")
-  } 
-  else {
+} else {
   ctx.beginPath();
-  ctx.moveTo(125, 125 - oR);
+  ctx.moveTo(125, 125 - outer);
   
   let x = 0;
   let angle = 0 * Math.PI;
     
   while (x < 5) {
-    ctx.lineTo(Math.cos(1.3 * Math.PI - angle) * iR + 125, Math.sin(1.3 * Math.PI - angle) * iR + 125);
-    ctx.lineTo(Math.cos(1.1 * Math.PI - angle) * oR + 125, Math.sin(1.1 * Math.PI - angle) * oR + 125);
+    ctx.lineTo(Math.cos(1.3 * Math.PI - angle) * inner + 125, Math.sin(1.3 * Math.PI - angle) * inner + 125);
+    ctx.lineTo(Math.cos(1.1 * Math.PI - angle) * outer + 125, Math.sin(1.1 * Math.PI - angle) * outer + 125);
     angle = angle + 0.4 * Math.PI;
     x = x + 1;
   }
@@ -315,34 +312,25 @@ function drawStopSign() {
   let ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, 1024, 512);
   
-  let sidelength = 80;
-  let center = [10 + (sidelength) / 2 + sidelength / Math.sqrt(2), 10 + (sidelength/2) + (sidelength/Math.sqrt(2))]
-  console.log(center)
-  let points = 8;
-  let point1 = [];
-  let point2 = [];
-
-  for (let i = 0; i < points; i++) {
-    point1.push (Math.cos(((Math.PI*2*i) / points) - Math.PI/8) * 100 + center[0]);
-    point2.push (Math.sin(((Math.PI*2*i) / points) - Math.PI/8) * 100 + center[1]);
-  }
   ctx.beginPath();
-  ctx.moveTo([point1][0], point2[0]);
-  for (let a = 0; a < point1.length; a++){
-    ctx.lineTo(point1[a], point2[a]);
-  }
-  ctx.lineTo(point1[0], point2[0]);
-  ctx.stroke();
+   ctx.moveTo(67, 10);
+   ctx.lineTo(147, 10);
+   ctx.lineTo(204, 67);
+   ctx.lineTo(204, 147);
+   ctx.lineTo(147, 204);
+   ctx.lineTo(67, 204);
+   ctx.lineTo(10, 147);
+   ctx.lineTo(10, 67);
+   ctx.lineTo(67, 10);
+   ctx.fillStyle = `red`
+   ctx.fill()
+   ctx.stroke();
 
-  ctx.fillStyle = "red";
-  ctx.fill();
-  ctx.closePath();
-  ctx.beginPath();
-  ctx.textAlign = "center";
-  ctx.font = "56px Sans Serif";
-  ctx.fillStyle = "white";
-  ctx.fillText("STOP", center[0], center[1] + 15);
-  ctx.closePath()
+  ctx.font = "65px sans-serif";
+  ctx.fillStyle = `white`;
+  ctx.fillText(`STOP`, 20, 133);
+
+  ctx.strokeText();
 }
 
 /*
@@ -364,28 +352,23 @@ function drawStopSign() {
  */
 
 function drawPyramid() {
-  let canvas = document.getElementById('canvas8');
-  let ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, 1024, 512);
-  
-  let side = Number(prompt("Please enter a side length."));
-  let coordinateX = 10;
-  let coordinateY = canvas.height - 10;
-  let i = 0;
-  lineNumber = 1;
-  while(i < 5) {
-    for(let j = 0 + lineNumber; j <= 5; j++) {
-      ctx.strokeRect(coordinateX, coordinateY - side, side, side);
-      coordinateX += side;
+  let sideLength=Number(prompt("enter a side length"));
+  let x=10;
+  let y=canvas.height-10;
+  let i=0;
+  lineNumber=1;
+  while(i<5){
+    for(let j=0+lineNumber;j<=5;j++){
+      ctx.strokeRect(x,y-sideLength,sideLength,sideLength);
+      x+=sideLength;
     }
-    coordinateX = 10 + (side/2) * lineNumber;
-    coordinateY -= side;
+    x=10+(sideLength/2)*lineNumber;
+    y-=sideLength;
     lineNumber++;
     i++;
   }
 
 }
-
 /*
  * House. 7 points.
  *
@@ -420,50 +403,50 @@ function drawHouse() {
   let ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, 1024, 512);
   
-while(true){
-  colorD = prompt("Enter a color for the Door");
-  colorH = prompt("Enter a color for the House");
-  if ((colorD == "brown" || colorD == "blue" || colorD == "green" || colorD == "orange" || colorD == "purple" || colorD == "red" || colorD == "yellow")
-  && (colorH == "brown" || colorH == "blue" || colorH == "green" || colorH == "orange" || colorH == "purple" || colorH == "red" || colorH == "yellow")) {
+  while(true){
+  doorColor=prompt("Enter a color for the Door");
+  houseColor=prompt("Enter a color for the House");
+  if((doorColor=="brown" || doorColor=="blue" || doorColor=="green" || doorColor=="orange" || doorColor=="purple" || doorColor=="red" || doorColor=="yellow")
+  && (houseColor=="brown" || houseColor=="blue" || houseColor=="green" || houseColor=="orange" || houseColor=="purple" || houseColor=="red" || houseColor=="yellow")) {
     break;
   }
-  else {
-      alert("One or more of your colors is invalid");
+  else{
+      alert("One or more of your colors is invalid")
   }
 }
- 
-let x = 150;
-let lengthH = 576;
-let heightH = 400;
-let y = canvas.height - heightH - 10;
+let x=150;
+let lengthHouse=576;
+let heightHouse=400;
+let y=canvas.height-heightHouse-10;
 ctx.beginPath();
 //house
-ctx.fillStyle = colorH;
-ctx.fillRect(x, y, lengthH, heightH);
+ctx.fillStyle=houseColor;
+ctx.fillRect(x,y,lengthHouse,heightHouse);
 //door
-ctx.fillStyle = colorD;
-ctx.fillRect(x + (lengthH/2) - 30, y + 300, 60, 100);
-ctx.strokeRect(x + (lengthH/2) - 30, y + 300, 60, 100);
+ctx.fillStyle=doorColor;
+ctx.fillRect(x+(lengthHouse/2)-30,y+300,60,100);
+ctx.strokeRect(x+(lengthHouse/2)-30,y+300,60,100);
 ctx.stroke();
 
 //roof
-ctx.fillStyle = "gray";
-ctx.moveTo(x, y);
-ctx.lineTo(x + 286, 150);
-ctx.lineTo(x + lengthH, y);
-ctx.lineTo(x, y);
+ctx.fillStyle="gray";
+ctx.moveTo(x,y);
+ctx.lineTo(x+286,150);
+ctx.lineTo(x+lengthHouse,y);
+ctx.lineTo(x,y);
 ctx.fill();
 //windows
-ctx.fillStyle = "#ADD8E6";
-ctx.fillRect(300, y + 100, 50, 50);
-ctx.fillRect(526, y + 100, 50, 50);
-ctx.fillRect(300, y + 200, 50, 50);
-ctx.fillRect(526, y + 200, 50, 50);
+ctx.fillStyle="#ADD8E6";
+ctx.fillRect(300,y+100, 50, 50);
+ctx.fillRect(526,y+100, 50, 50);
+ctx.fillRect(300,y+200, 50, 50);
+ctx.fillRect(526,y+200, 50, 50);
 ctx.closePath();
 //doorknob
 ctx.beginPath();
-ctx.fillStyle = 'black';
+ctx.fillStyle='black';
 ctx.arc(450, 700, 6, 0, Math.PI*2);
 ctx.fill();
-ctx.closePath();
+ctx.closePath()
 }
+
