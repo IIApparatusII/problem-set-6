@@ -219,9 +219,21 @@ let coordinate = 10 + radius;
     ctx.arc(coordinate, coordinate, radius, 0, Math.PI * 2, true);
     ctx.moveTo((coordinate + (radius * 0.75)), coordinate);
     ctx.arc(coordinate, coordinate, (radius - (radius * 0.25)), 0, Math.PI, false);
-    ctx.moveTo((coordinate - (radius * 0.5)), (coordinate - (radius * 0.5)));
-    ctx.arc(radius, radius, (radius - (radius * 0.75)), 0, Math.PI * 2, true);
+    //ctx.moveTo((coordinate - (radius * 0.5)), (coordinate - (radius * 0.5)));
+    //ctx.arc(radius, radius, (radius - (radius * 0.75)), 0, Math.PI * 2, true);
   ctx.stroke();
+  
+  let coordinateX = canvas.width;
+  let coordinateY = canvas.height;
+  
+  ctx.beginPath();
+    ctx.arc(coordinateX / 2 - radius / 3, coordinateY / 2 - radius / 4, (radius * 0.1), 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.beginPath();
+    ctx.arc(coordinateX / 2 + radius / 3, coordinateY / 2 - radius / 4, (radius * 0.1), 0, Math.PI * 2);
+  ctx.stroke();
+
 /*Forgot to make moveTo and ctx.arc different lines. Change it.*/
 }
 
@@ -244,7 +256,44 @@ let coordinate = 10 + radius;
  */
 
 function drawStar() {
+  let canvas = document.getElementById('canvas6');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512);
 
+  let oR = prompt("Enter the Outer Radius");
+  let iR = prompt("Enter the Inner Radius");
+    
+  oR = Number(oR);
+  iR = Number(iR);
+  if (isNaN(oR) == true || isNaN(iR) == true) {
+  alert("One of your inputs is not a number.");
+  } 
+  else if (oR < 2) {
+  alert("Your outer radius is too small.");
+  } 
+  else if (iR < 1) {
+  alert("Your inner radius is too small.");
+  } 
+  else if (oR <= iR) {
+  alert("Your outer radius must be larger than your inner radius.")
+  } 
+  else {
+  ctx.beginPath();
+  ctx.moveTo(125, 125 - oR);
+  
+  let x = 0;
+  let angle = 0 * Math.PI;
+    
+  while (x < 5) {
+    ctx.lineTo(Math.cos(1.3 * Math.PI - angle) * iR + 125, Math.sin(1.3 * Math.PI - angle) * iR + 125);
+    ctx.lineTo(Math.cos(1.1 * Math.PI - angle) * oR + 125, Math.sin(1.1 * Math.PI - angle) * oR + 125);
+    angle = angle + 0.4 * Math.PI;
+    x = x + 1;
+  }
+  ctx.closePath();
+  ctx.stroke();
+  lineWidth = 1;
+}
 }
 
 /*
@@ -263,7 +312,38 @@ function drawStar() {
  */
 
 function drawStopSign() {
+  let canvas = document.getElementById('canvas7');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512);
+  
+  let sidelength = 80;
+  let center = [10 + (sidelength) / 2 + sidelength / Math.sqrt(2), 10 + (sidelength/2) + (sidelength/Math.sqrt(2))]
+  console.log(center)
+  let points = 8;
+  let point1 = [];
+  let point2 = [];
 
+  for (let i = 0; i < points; i++) {
+    point1.push (Math.cos(((Math.PI*2*i) / points) - Math.PI/8) * 100 + center[0]);
+    point2.push (Math.sin(((Math.PI*2*i) / points) - Math.PI/8) * 100 + center[1]);
+  }
+  ctx.beginPath();
+  ctx.moveTo([point1][0], point2[0]);
+  for (let a = 0; a < point1.length; a++){
+    ctx.lineTo(point1[a], point2[a]);
+  }
+  ctx.lineTo(point1[0], point2[0]);
+  ctx.stroke();
+
+  ctx.fillStyle = "red";
+  ctx.fill();
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.textAlign = "center";
+  ctx.font = "56px Sans Serif";
+  ctx.fillStyle = "white";
+  ctx.fillText("STOP", center[0], center[1] + 15);
+  ctx.closePath()
 }
 
 /*
@@ -285,6 +365,25 @@ function drawStopSign() {
  */
 
 function drawPyramid() {
+  let canvas = document.getElementById('canvas8');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512);
+  
+  let side = Number(prompt("Please enter a side length."));
+  let coordinateX = 10;
+  let coordinateY = canvas.height - 10;
+  let i = 0;
+  lineNumber = 1;
+  while(i < 5) {
+    for(let j = 0 + lineNumber; j <= 5; j++) {
+      ctx.strokeRect(coordinateX, coordinateY - side, side, side);
+      coordinateX += side;
+    }
+    coordinateX = 10 + (side/2) * lineNumber;
+    coordinateY -= side;
+    lineNumber++;
+    i++;
+  }
 
 }
 
@@ -318,5 +417,54 @@ function drawPyramid() {
  */
 
 function drawHouse() {
+  let canvas = document.getElementById('canvas9');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 1024, 512);
+  
+while(true){
+  colorD = prompt("Enter a color for the Door");
+  colorH = prompt("Enter a color for the House");
+  if ((colorD == "brown" || colorD == "blue" || colorD == "green" || colorD == "orange" || colorD == "purple" || colorD == "red" || colorD == "yellow")
+  && (colorH == "brown" || colorH == "blue" || colorH == "green" || colorH == "orange" || colorH == "purple" || colorH == "red" || colorH == "yellow")) {
+    break;
+  }
+  else {
+      alert("One or more of your colors is invalid");
+  }
+}
+ 
+let x = 150;
+let lengthH = 576;
+let heightH = 400;
+let y = canvas.height - heightH - 10;
+ctx.beginPath();
+//house
+ctx.fillStyle = colorH;
+ctx.fillRect(x, y, lengthH, heightH);
+//door
+ctx.fillStyle = colorD;
+ctx.fillRect(x + (lengthH/2) - 30, y + 300, 60, 100);
+ctx.strokeRect(x + (lengthH/2) - 30, y + 300, 60, 100);
+ctx.stroke();
 
+//roof
+ctx.fillStyle = "gray";
+ctx.moveTo(x, y);
+ctx.lineTo(x + 286, 150);
+ctx.lineTo(x + lengthH, y);
+ctx.lineTo(x, y);
+ctx.fill();
+//windows
+ctx.fillStyle = "#ADD8E6";
+ctx.fillRect(300, y + 100, 50, 50);
+ctx.fillRect(526, y + 100, 50, 50);
+ctx.fillRect(300, y + 200, 50, 50);
+ctx.fillRect(526, y + 200, 50, 50);
+ctx.closePath();
+//doorknob
+ctx.beginPath();
+ctx.fillStyle = 'black';
+ctx.arc(450, 700, 6, 0, Math.PI*2);
+ctx.fill();
+ctx.closePath();
 }
