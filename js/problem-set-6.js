@@ -223,15 +223,14 @@ let coordinate = 10 + radius;
     //ctx.arc(radius, radius, (radius - (radius * 0.75)), 0, Math.PI * 2, true);
   ctx.stroke();
   
-  let coordinateX = canvas.width;
-  let coordinateY = canvas.height;
+ 
   
   ctx.beginPath();
-    ctx.arc(coordinateX / 2 - radius / 3, coordinateY / 2 - radius / 4, (radius * 0.1), 0, Math.PI * 2);
+    ctx.arc(coordinate - (radius * 0.1), coordinate - (radius * 0.5), (radius * 0.1), 0, Math.PI * 2);
   ctx.stroke();
 
   ctx.beginPath();
-    ctx.arc(coordinateX / 2 + radius / 3, coordinateY / 2 - radius / 4, (radius * 0.1), 0, Math.PI * 2);
+    ctx.arc(coordinate + (radius * 0.1), coordinate - (radius * 0.5), (radius * 0.1), 0, Math.PI * 2);
   ctx.stroke();
 
 /*Forgot to make moveTo and ctx.arc different lines. Change it.*/
